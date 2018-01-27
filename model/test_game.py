@@ -227,3 +227,18 @@ def test_can_move_when_no_cells_available():
     assert game.can_move(DOWN) == False
     assert game.can_move(RIGHT) == True
     assert game.can_move(LEFT) == True
+
+
+def test_can_move_special_case():
+    game = Game2048()
+    game._grid = np.array([
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 1, 0],
+    ]).astype(np.uint8)
+
+    assert game.can_move(UP) == True
+    assert game.can_move(RIGHT) == True
+    assert game.can_move(LEFT) == True
+    assert game.can_move(DOWN) == False

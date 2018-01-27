@@ -100,13 +100,13 @@ class Game2048:
         return moved, score
 
     def can_move(self, direction):
-        if self.has_cells_available():
-            return True
-
         for i in range(N):
             for j in range(N-1):
                 value = self._get(i, j, direction=direction)
-                if value != 0 and value == self._get(i, j+1, direction=direction):
+                next_value = self._get(i, j+1, direction=direction)
+                if value != 0 and value == next_value:
+                    return True
+                elif value == 0 and next_value != 0:
                     return True
 
         return False
