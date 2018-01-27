@@ -17,7 +17,15 @@ POSITION_TURNS = {
 class Game2048:
     def __init__(self):
         self.reset()
-        
+
+    def copy(self):
+        game = Game2048()
+        game._grid = np.copy(self._grid)
+        game.game_over = self.game_over
+        game.score = self.score
+
+        return game
+
     def reset(self):
         self.game_over = False
         self.score = 0
