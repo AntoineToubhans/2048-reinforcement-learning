@@ -105,9 +105,8 @@ class Game2048:
 
         for i in range(N):
             for j in range(N-1):
-                if (LEFT == direction or RIGHT == direction) and self._get(i, j) == self._get(i, j+1):
-                    return True
-                if (UP == direction or DOWN == direction) and self._get(j, i) == self._get(j+1, i):
+                value = self._get(i, j, direction=direction)
+                if value != 0 and value == self._get(i, j+1, direction=direction):
                     return True
 
         return False
@@ -118,9 +117,9 @@ class Game2048:
     def has_tile_match_available(self):
         for i in range(N):
             for j in range(N-1):
-                if self._get(i, j) == self._get(i, j+1):
+                if self._get(i, j) == self._get(i, j+1) and self._get(i, j) != 0:
                     return True
-                if self._get(j, i) == self._get(j+1, i):
+                if self._get(j, i) == self._get(j+1, i) and self._get(j, i) != 0:
                     return True
 
         return False
