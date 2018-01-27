@@ -167,3 +167,33 @@ def test_game_over():
     assert moved == 3
     assert game.grid[0][0] == 2 or game.grid[0][0] == 4
     assert game.game_over == True
+
+
+def test_is_game_over_when_tile_match_are_available():
+    game = Game2048()
+    game._grid = np.array([
+        [5, 2, 1, 1],
+        [3, 4, 3, 5],
+        [1, 6, 4, 1],
+        [4, 1, 2, 4],
+    ]).astype(np.uint8)
+
+    np.testing.assert_equal(game.grid, np.array([
+        [32, 4, 2, 2],
+        [8, 16, 8, 32],
+        [2, 64, 16, 2],
+        [16, 2, 4, 16],
+    ]))
+
+    moved, score = game.play(LEFT)
+
+    np.testing.assert_equal(game.grid[1:], np.array([
+        [8, 16, 8, 32],
+        [2, 64, 16, 2],
+        [16, 2, 4, 16],
+    ]))
+
+    first_row = list(game.grid[0])
+
+    assert first_row == [32, 4, 4, 2] or first_row == [32, 4, 4, 4]
+    assert game.game_over == False

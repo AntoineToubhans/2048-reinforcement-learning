@@ -103,6 +103,13 @@ class Game2048:
         return self._grid.min() == 0
 
     def has_tile_match_available(self):
+        for i in range(N):
+            for j in range(N-1):
+                if self._get(i, j) == self._get(i, j+1):
+                    return True
+                if self._get(j, i) == self._get(j+1, i):
+                    return True
+
         return False
 
     def has_move_available(self):
