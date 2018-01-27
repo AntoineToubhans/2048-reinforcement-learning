@@ -109,6 +109,13 @@ class Game2048:
         return self.has_cells_available() or self.has_tile_match_available()
 
     def play(self, direction):
+        """
+        Plays:
+        - @args direction [int]: UP (0), RIGHT (1), DOWN (2) or LEFT (3)
+        - @return (moved, score) [int, int]: number of tiles that have moved
+                                             and the score i.e. the sum of
+                                             the values of merged tiles
+        """
         moved, score = self.move(direction)
         self.score += score
 
@@ -118,4 +125,4 @@ class Game2048:
             if not self.has_move_available():
                 self.game_over = True
             
-        return score
+        return moved, score

@@ -141,7 +141,7 @@ def test_game_over():
         [16, 2, 4, 16],
     ]))
 
-    score = game.play(DOWN)
+    moved, score = game.play(DOWN)
 
     np.testing.assert_equal(game.grid, np.array([
         [32, 8, 2, 2],
@@ -150,10 +150,11 @@ def test_game_over():
         [16, 2, 4, 16],
     ]))
 
+    assert moved == 0
     assert score == 0
     assert game.game_over == False
 
-    score = game.play(RIGHT)
+    moved, score = game.play(RIGHT)
 
     np.testing.assert_equal(game.grid[1:], np.array([
         [8, 16, 4, 8],
@@ -163,5 +164,6 @@ def test_game_over():
 
     np.testing.assert_equal(game.grid[0][1:], np.array([32, 8, 4]))
 
+    assert moved == 3
     assert game.grid[0][0] == 2 or game.grid[0][0] == 4
     assert game.game_over == True
