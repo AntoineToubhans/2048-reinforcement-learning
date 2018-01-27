@@ -99,6 +99,19 @@ class Game2048:
         
         return moved, score
 
+    def can_move(self, direction):
+        if self.has_cells_available():
+            return True
+
+        for i in range(N):
+            for j in range(N-1):
+                if (LEFT == direction or RIGHT == direction) and self._get(i, j) == self._get(i, j+1):
+                    return True
+                if (UP == direction or DOWN == direction) and self._get(j, i) == self._get(j+1, i):
+                    return True
+
+        return False
+
     def has_cells_available(self):
         return self._grid.min() == 0
 

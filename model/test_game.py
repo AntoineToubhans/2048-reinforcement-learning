@@ -197,3 +197,33 @@ def test_is_game_over_when_tile_match_are_available():
 
     assert first_row == [32, 4, 4, 2] or first_row == [32, 4, 4, 4]
     assert game.game_over == False
+
+
+def test_can_move_any_direction_when_cells_are_available():
+    game = Game2048()
+    game._grid = np.array([
+        [5, 2, 1, 1],
+        [3, 4, 0, 5],
+        [1, 6, 4, 1],
+        [4, 1, 2, 4],
+    ]).astype(np.uint8)
+
+    assert game.can_move(UP) == True
+    assert game.can_move(RIGHT) == True
+    assert game.can_move(DOWN) == True
+    assert game.can_move(LEFT) == True
+
+
+def test_can_move_when_no_cells_available():
+    game = Game2048()
+    game._grid = np.array([
+        [5, 2, 1, 1],
+        [3, 4, 2, 5],
+        [1, 6, 4, 1],
+        [4, 1, 2, 4],
+    ]).astype(np.uint8)
+
+    assert game.can_move(UP) == False
+    assert game.can_move(DOWN) == False
+    assert game.can_move(RIGHT) == True
+    assert game.can_move(LEFT) == True
